@@ -53,7 +53,7 @@ perl -pi -e 's@<loc>/index.html@<loc>/@g' $VERSION/sitemap.xml
 perl -pi -e 's@<loc>@<loc>https://prestosql.io/docs/current@g' $VERSION/sitemap.xml
 
 echo "/current/* /$VERSION/:splat 200" > _redirects
-ln -sfh $VERSION current
+/bin/ln -sfh $VERSION current
 
 git add $VERSION _redirects current
 
