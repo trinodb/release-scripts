@@ -39,16 +39,6 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
   </head>
 @"
 
-find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
-"s@<div class=\"header\">
-@<div class=\"header\">
-    <span style=\"float: right; margin-top: 20px;\">
-        <a href=\"/slack.html\">
-            <img height=\"24\" src=\"https://img.shields.io/badge/Slack-ask%20for%20help-44af5c.svg?logo=slack\">
-        </a>
-    </span>
-@"
-
 perl -pi -e 's@<loc>/index.html@<loc>/@g' $VERSION/sitemap.xml
 perl -pi -e 's@<loc>@<loc>https://prestosql.io/docs/current@g' $VERSION/sitemap.xml
 
