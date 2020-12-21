@@ -40,7 +40,7 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
       gtag('config', '$AUDIENCEID');
       window._linkedin_data_partner_ids = ['$LINKEDINID'];
     </script>
-    script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
+    <script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
   </head>
 @"
 
