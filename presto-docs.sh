@@ -13,6 +13,7 @@ GROUPDIR=$(echo $GROUP | tr . /)
 CENTRAL=central::default::https://repo1.maven.org/maven2
 
 TRACKINGID=UA-133457846-1
+AUDIENCEID=AW-1036784065
 
 if [ -e $VERSION ]
 then
@@ -35,6 +36,7 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', '$TRACKINGID');
+      gtag('config', '$AUDIENCEID');
     </script>
   </head>
 @"
