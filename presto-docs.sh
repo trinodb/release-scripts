@@ -14,6 +14,7 @@ CENTRAL=central::default::https://repo1.maven.org/maven2
 
 TRACKINGID=UA-133457846-1
 AUDIENCEID=AW-1036784065
+LINKEDINID=2842796
 
 if [ -e $VERSION ]
 then
@@ -37,7 +38,9 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
       gtag('js', new Date());
       gtag('config', '$TRACKINGID');
       gtag('config', '$AUDIENCEID');
+      window._linkedin_data_partner_ids = ['$LINKEDINID'];
     </script>
+    script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
   </head>
 @"
 
