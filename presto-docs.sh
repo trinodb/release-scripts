@@ -45,7 +45,7 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
 @"
 
 perl -pi -e 's@<loc>/index.html@<loc>/@g' $VERSION/sitemap.xml
-perl -pi -e 's@<loc>@<loc>https://prestosql.io/docs/current@g' $VERSION/sitemap.xml
+perl -pi -e 's@<loc>@<loc>https://trino.io/docs/current@g' $VERSION/sitemap.xml
 
 echo "/current/* /$VERSION/:splat 200" > _redirects
 /bin/ln -sfh $VERSION current
