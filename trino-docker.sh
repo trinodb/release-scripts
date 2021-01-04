@@ -3,10 +3,10 @@
 set -eux
 
 VERSION=$1
-NAME=prestosql/presto
-IMAGE=presto:$VERSION
+NAME=trinodb/trino
+IMAGE=trino:$VERSION
 
-docker/build-remote.sh $VERSION
+core/docker/build-remote.sh $VERSION
 docker tag $IMAGE $NAME:latest
 docker push $NAME:latest
 docker tag $IMAGE $NAME:$VERSION
