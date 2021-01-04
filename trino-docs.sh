@@ -5,8 +5,8 @@ set -eu
 VERSION=$1
 
 REPOSITORY=$HOME/.m2/repository
-GROUP=io.prestosql
-ARTIFACT=presto-docs
+GROUP=io.trino
+ARTIFACT=trino-docs
 
 GROUPDIR=$(echo $GROUP | tr . /)
 
