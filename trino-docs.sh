@@ -42,10 +42,52 @@ find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
     </script>
     <script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
   </head>
-@"
+@;
+s@<style>
+@<link href=\"https://fonts.googleapis.com/css2?family=Alata&family=Open+Sans:ital,wght%400,300;0,400;0,600;1,400&display=swap\" rel=\"stylesheet\">
+    <style>
+@;
+s@<header class=\"md-header\" data-md-component=\"header\">
+@<div id=\"announcement\">
+  <div id=\"announcement-content\">
+    Presto SQL is now Trino
+    <a href=\"https://trino.io/blog/2020/12/27/announcing-trino.html\" target=\"_blank\">Read why &raquo;</a>
+  </div>
+  <header class=\"md-header\" data-md-component=\"header\">
+@;
+s@</header>@</header></div>@
+"
 
-perl -pi -e 's@<loc>/index.html@<loc>/@g' $VERSION/sitemap.xml
-perl -pi -e 's@<loc>@<loc>https://trino.io/docs/current@g' $VERSION/sitemap.xml
+cat <<EOT >> $VERSION/_static/trino.css
+
+.md-sidebar { padding-block-start: 75px; }
+.md-content { padding-block-start: 50px; }
+header.md-header { top: auto; }
+#announcement {
+  z-index: 2;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+#announcement-content {
+  background-color: #dd00a1;
+  border: 1px;
+  color: white;
+  text-align: center;
+  height: 53px;
+  padding: 16px;
+  font-family: Alata, sans-serif;
+  line-height: 21.6px;
+  font-size: 18px;
+  font-weight: 300;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+#announcement-content a {
+  text-decoration: underline;
+  margin-left: 32px;
+}
+EOT
 
 echo "/current/* /$VERSION/:splat 200" > _redirects
 /bin/ln -sfh $VERSION current
