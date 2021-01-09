@@ -56,7 +56,8 @@ s@<header class=\"md-header\" data-md-component=\"header\">
 </div>
 <header class=\"md-header\" data-md-component=\"header\">
 @;
-s@</header>@</header>@
+s@</header>@</header>@;
+s@<a href=\"[^\"]*\" title=\"Trino $VERSION Documentation\"@<a href=\"/\" title=\"Trino\"@;
 "
 
 cat <<EOT >> $VERSION/_static/trino.css
