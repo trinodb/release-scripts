@@ -53,16 +53,17 @@ s@<header class=\"md-header\" data-md-component=\"header\">
     Presto SQL is now Trino
     <a href=\"https://trino.io/blog/2020/12/27/announcing-trino.html\" target=\"_blank\">Read why &raquo;</a>
   </div>
-  <header class=\"md-header\" data-md-component=\"header\">
+</div>
+<header class=\"md-header\" data-md-component=\"header\">
 @;
-s@</header>@</header></div>@
+s@</header>@</header>@
 "
 
 cat <<EOT >> $VERSION/_static/trino.css
 
 .md-sidebar { padding-block-start: 75px; }
 .md-content { padding-block-start: 50px; }
-header.md-header { top: auto; }
+header.md-header { top: 53px; }
 #announcement {
   z-index: 2;
   position: fixed;
@@ -86,6 +87,14 @@ header.md-header { top: auto; }
 #announcement-content a {
   text-decoration: underline;
   margin-left: 32px;
+}
+.md-typeset span[id]:target:before {
+    margin-top:-92px;
+    padding-top:92px;
+}
+.md-typeset dl[id]:target:before {
+    margin-top:-134px;
+    padding-top:134px;
 }
 EOT
 
