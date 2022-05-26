@@ -7,7 +7,7 @@ NAME=trinodb/trino
 IMAGE=trino:$VERSION
 TARGET=$NAME:$VERSION
 
-core/docker/build-remote.sh $VERSION
+core/docker/build.sh -r $VERSION
 
 docker tag $IMAGE-amd64 $TARGET-amd64
 docker tag $IMAGE-arm64 $TARGET-arm64
