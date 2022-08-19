@@ -16,21 +16,20 @@ TRACKINGID=UA-133457846-1
 AUDIENCEID=AW-1036784065
 LINKEDINID=2842796
 
-if [ -e $VERSION ]
-then
-   echo "already exists: $VERSION"
-   exit 100
+if [ -e "$VERSION" ]; then
+    echo "already exists: $VERSION"
+    exit 100
 fi
 
 mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
-  -Dartifact=$GROUP:$ARTIFACT:$VERSION:zip -DremoteRepositories=$CENTRAL
+    -Dartifact=$GROUP:$ARTIFACT:$VERSION:zip -DremoteRepositories=$CENTRAL
 
-unzip $REPOSITORY/$GROUPDIR/$ARTIFACT/$VERSION/$ARTIFACT-$VERSION.zip
+unzip "$REPOSITORY/$GROUPDIR/$ARTIFACT/$VERSION/$ARTIFACT-$VERSION.zip"
 
-mv html $VERSION
+mv html "$VERSION"
 
-find -H $VERSION -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
-"s@</head>
+find -H "$VERSION" -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
+    "s@</head>
 @  <script async src=\"https://www.googletagmanager.com/gtag/js?id=$TRACKINGID\"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -60,7 +59,7 @@ s@</header>@</header>@;
 s@<a href=\"[^\"]*\" title=\"Trino $VERSION Documentation\"@<a href=\"/\" title=\"Trino\"@;
 "
 
-cat <<EOT >> $VERSION/_static/trino.css
+cat <<EOT >>$VERSION/_static/trino.css
 
 .md-sidebar { padding-block-start: 75px; }
 .md-content { padding-block-start: 50px; }
@@ -105,9 +104,9 @@ header.md-header { top: 53px; }
 }
 EOT
 
-echo "/current/* /$VERSION/:splat 200" > _redirects
-/bin/ln -sfh $VERSION current
+echo "/current/* /$VERSION/:splat 200" >_redirects
+/bin/ln -sfh "$VERSION" current
 
-git add $VERSION _redirects current
+git add "$VERSION" _redirects current
 
 git commit -m "Add $VERSION docs"
