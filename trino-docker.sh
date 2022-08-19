@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eux
 
@@ -9,12 +9,14 @@ TARGET=$REPO:$VERSION
 
 core/docker/build.sh -r "$VERSION"
 
-docker tag "$IMAGE-amd64" "$TARGET-amd64"
-docker tag "$IMAGE-arm64" "$TARGET-arm64"
-docker push "$TARGET-amd64"
-docker push "$TARGET-arm64"
+architectures=(amd64 arm64 ppc64le)
+
+for arch in "${architectures[@]}"; do
+    docker tag "$IMAGE-$arch" "$TARGET-$arch"
+    docker push "$TARGET-$arch"
+done
 
 for name in "$TARGET" "$REPO:latest"; do
-    docker manifest create "$name" "$TARGET-amd64" "$TARGET-arm64"
+    docker manifest create "$name" "${architectures[@]/#/$TARGET-}"
     docker manifest push --purge "$name"
 done
