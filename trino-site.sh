@@ -4,7 +4,7 @@ set -eu
 
 VERSION=$1
 
-perl -pi -e 's/trino_version: \d+/trino_version: '$VERSION'/g' _config.yml
+perl -pi -e 's/trino_version: \d+/trino_version: '"$VERSION"'/g' _config.yml
 
 git add _config.yml
 
