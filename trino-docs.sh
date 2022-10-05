@@ -40,6 +40,7 @@ find -H "$VERSION" -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
       window._linkedin_data_partner_ids = ['$LINKEDINID'];
     </script>
     <script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   </head>
 @;
 s@<style>
@@ -49,8 +50,9 @@ s@<style>
 s@<header class=\"md-header\" data-md-component=\"header\">
 @<div id=\"announcement\">
   <div id=\"announcement-content\">
-    Presto SQL is now Trino
-    <a href=\"https://trino.io/blog/2020/12/27/announcing-trino.html\" target=\"_blank\">Read why &raquo;</a>
+    <a href=\"https://github.com/trinodb/trino\" target=\"_blank\">
+      Do you ❤️ Trino? Give us a 🌟 on GitHub <i class="fab fa-github"></i>
+    </a>
   </div>
 </div>
 <header class=\"md-header\" data-md-component=\"header\">
