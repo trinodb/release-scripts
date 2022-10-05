@@ -51,7 +51,7 @@ s@<header class=\"md-header\" data-md-component=\"header\">
 @<div id=\"announcement\">
   <div id=\"announcement-content\">
     <a href=\"https://github.com/trinodb/trino\" target=\"_blank\">
-      Do you ❤️ Trino? Give us a 🌟 on GitHub <i class="fab fa-github"></i>
+      Do you ❤️ Trino? Give us a 🌟 on GitHub <i class=\"fab fa-github\"></i>
     </a>
   </div>
 </div>
@@ -87,7 +87,6 @@ header.md-header { top: 53px; }
   -webkit-font-smoothing: antialiased !important;
 }
 #announcement-content a {
-  text-decoration: underline;
   margin-left: 32px;
 }
 .md-typeset span[id]:target:before {
