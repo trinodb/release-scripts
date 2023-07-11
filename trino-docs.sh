@@ -12,9 +12,10 @@ GROUPDIR=$(echo $GROUP | tr . /)
 
 CENTRAL=central::default::https://repo1.maven.org/maven2
 
-TRACKINGID=UA-133457846-1
-AUDIENCEID=AW-1036784065
-LINKEDINID=2842796
+GOOGLE_GA4_ID=G-RJ94STKPJ5
+GOOGLE_UA_ID=UA-133457846-1
+AUDIENCE_ID=AW-1036784065
+LINKEDIN_ID=2842796
 
 if [ -e "$VERSION" ]; then
     echo "already exists: $VERSION"
@@ -30,14 +31,15 @@ mv html "$VERSION"
 
 find -H "$VERSION" -type f -name '*.html' -print0 | xargs -0 perl -pi -e \
     "s@</head>
-@  <script async src=\"https://www.googletagmanager.com/gtag/js?id=$TRACKINGID\"></script>
+@  <script async src=\"https://www.googletagmanager.com/gtag/js?id=$GOOGLE_GA4_ID\"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', '$TRACKINGID');
-      gtag('config', '$AUDIENCEID');
-      window._linkedin_data_partner_ids = ['$LINKEDINID'];
+      gtag('config', '$GOOGLE_GA4_ID');
+      gtag('config', '$GOOGLE_UA_ID');
+      gtag('config', '$AUDIENCE_ID');
+      window._linkedin_data_partner_ids = ['$LINKEDIN_ID'];
     </script>
     <script async src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
