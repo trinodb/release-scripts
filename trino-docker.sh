@@ -3,20 +3,23 @@
 set -eux
 
 VERSION=$1
-REPO=trinodb/trino
-IMAGE=trino:$VERSION
-TARGET=$REPO:$VERSION
-
-core/docker/build.sh -r "$VERSION"
-
+REGISTRY=trinodb
 architectures=(amd64 arm64 ppc64le)
+packages=(trino-server-core trino-server)
+tags=(trino-core trino)
 
-for arch in "${architectures[@]}"; do
-    docker tag "$IMAGE-$arch" "$TARGET-$arch"
-    docker push "$TARGET-$arch"
-done
+for index in "${!packages[@]}"; do
+    TAG=${tags[$index]}
+    TARGET=$REGISTRY/$TAG:$VERSION
+    core/docker/build.sh -a "$(IFS=, ; echo "${architectures[*]}")" -r "$VERSION" -p "${packages[$index]}" -t "$TAG"
 
-for name in "$TARGET" "$REPO:latest"; do
-    docker manifest create "$name" "${architectures[@]/#/$TARGET-}"
-    docker manifest push --purge "$name"
+    for arch in "${architectures[@]}"; do
+        docker tag "$TAG:$VERSION-$arch" "$TARGET-$arch"
+        docker push "$TARGET-$arch"
+    done
+
+    for name in "$TARGET" "$REGISTRY/$TAG:latest"; do
+        docker manifest create "$name" "${architectures[@]/#/$TARGET-}"
+        docker manifest push --purge "$name"
+    done
 done
